@@ -1,0 +1,31 @@
+<section class="container">
+  <header>Registration Form</header>
+
+  <form class="form form-shadow" (ngSubmit)="registerUser()" #formRef="ngForm">
+    <div class="input-box">
+      <input type="text" placeholder="username" required name="username" ngModel />
+    </div>
+
+    <div class="input-box">
+      <input type="email" placeholder="Email" required name="email" ngModel email />
+    </div>
+
+    <div class="input-box">
+      <input type="password" placeholder="password" required name="password" ngModel />
+    </div>
+    <small *ngIf="
+        formRef.controls['email']?.status === 'INVALID' &&
+          formRef.controls['email'].touched &&
+          formRef.controls['email'].dirty;
+        else req
+      ">Invaild email</small>
+    <ng-template #req>
+      <small *ngIf="formRef.invalid && formRef.touched">
+        All field are required
+      </small>
+    </ng-template>
+    <small *ngIf="errorMessage">{{errorMessage}}</small>
+
+    <input type="submit" value="Submit" class="submit-btn" [disabled]="formRef.invalid" />
+  </form>
+</section>

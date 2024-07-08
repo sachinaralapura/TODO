@@ -1,0 +1,72 @@
+.container {
+  position: relative;
+  background: #fff;
+  width: 520px;
+  height: 360px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 30px 30px;
+  border-radius: 10px;
+  margin: 75px auto;
+}
+.container header {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 500;
+  text-align: center;
+}
+.container .form {
+  margin-top: 20px;
+}
+
+.form .input-box {
+  width: 100%;
+  margin: 5px;
+}
+
+.input-box input {
+  box-sizing: border-box;
+}
+
+.form :where(.input-box input) {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #707070;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0 15px;
+}
+
+.input-box input:focus {
+  box-shadow: rgba(96, 96, 96, 0.35) 0px 5px 15px;
+}
+
+.form .submit-btn {
+  width: 100%;
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 15px;
+  margin: 30px 0px;
+  background-color: #28282b;
+}
+
+.form .submit-btn:hover {
+  background: #ff2800;
+}
+
+
+/* input.ng-invalid.ng-touched {
+  border: red 2px solid;
+} */
+
+small {
+  color: red;
+  font-weight: bold;
+}

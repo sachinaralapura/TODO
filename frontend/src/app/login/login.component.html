@@ -1,0 +1,31 @@
+<div class="app-login-form">
+  <h2>Login Here</h2>
+  <form (ngSubmit)="loginUser()" #formRef="ngForm">
+    <div class="form-input">
+      <label>Email Address</label>
+      <input type="text" placeholder="Email address" name="email" ngModel required email />
+    </div>
+    <div class="form-input">
+      <label>Password</label>
+      <input type="password" placeholder="Password" name="password" ngModel required />
+    </div>
+
+    <small *ngIf="
+    formRef.controls['email']?.status === 'INVALID' &&
+      formRef.controls['email'].touched &&
+      formRef.controls['email'].dirty;
+    else req
+  ">Invaild email</small>
+    <ng-template #req>
+      <small *ngIf="formRef.invalid && formRef.touched">
+        All field are required
+      </small>
+    </ng-template>
+    <small *ngIf="errorMessage">{{errorMessage}}</small>
+    <input type="submit" value="Submit" class="app-login-btn" [disabled]="formRef.invalid" />
+    <p>
+      Do not have an accout yet?
+      <a routerLink="/register" class="app-toggle-btn"> Register </a>
+    </p>
+  </form>
+</div>

@@ -1,0 +1,60 @@
+GET http://localhost:5000/todo/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBwIiwicGFzc3dvcmQiOiJwYXNzd29yZCIsImlhdCI6MTcyMDM1NDYwM30.JZ1wW8YbuVQsKG6Go4PzKcuCxBP-E4D_fjZaP0BuRsI
+
+###
+
+GET  http://localhost:5000/todo/tasks/all
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjhhYWYwZDExMzdhOWZjNGViZGIxZTEiLCJlbWFpbCI6InNhY2hpbi5hcmFsYXB1cmFAZ21haWwuY29tIiwiaWF0IjoxNzIwMzcwNjQ1fQ.LVm7HHzN93gahomY6Q39XsC-ALG7njtmvXmh6AuuyqQ
+
+
+###
+POST  http://localhost:5000/todo/tasks/newTask
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjhiZTUzN2ZhYmIxNmFkZTEzODk2YTYiLCJlbWFpbCI6InNhY2hpbi5hcmFsYXB1cmFAZ21haWwuY29tIiwiaWF0IjoxNzIwNDQ0MjE2fQ.u8Rqcrwt4adEIIJTM6yn7z-b56CXJ-lhA2YGBvpCa5E
+
+{
+    "taskTitle" : "Wash car",
+    "description" : "wash car this morning",
+    "completed" : false,
+    "scheduleAt" : "2024-07-07T12:15:51.820+00:00"
+}
+
+###
+
+POST http://localhost:5000/todo/register
+Content-Type: application/json
+
+{
+    "email" : "sachin.aralapura@gmail.com",
+    "password" : "sacinppp",
+    "userName" : "sachinaralapura"
+
+}
+
+###
+POST http://localhost:5000/todo/register
+Content-Type: application/json
+
+{
+    "email" : "sachinaralapura2001@gmail.com",
+    "password" : "sachin333",
+    "userName" : "sachinass"
+}
+
+###
+
+POST http://localhost:5000/todo/login
+Content-Type: application/json
+
+{
+    "email" :"sachin.aralapura@gmail.com",
+    "password":"sacinppp"
+    
+}
+
+###
+
+DELETE  http://localhost:5000/todo/tasks/deleteTask/668be571fabb16ade13896a8
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjhiZTUzN2ZhYmIxNmFkZTEzODk2YTYiLCJlbWFpbCI6InNhY2hpbi5hcmFsYXB1cmFAZ21haWwuY29tIiwiaWF0IjoxNzIwNDQ0MjE2fQ.u8Rqcrwt4adEIIJTM6yn7z-b56CXJ-lhA2YGBvpCa5E
