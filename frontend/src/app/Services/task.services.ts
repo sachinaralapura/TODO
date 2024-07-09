@@ -15,31 +15,27 @@ export class TaskServices {
   errorMessage: string | null = null;
 
   getAllTask() {
-    const headers = new HttpHeaders({
-      authorization:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjhjMzllMDQ1MmVlYjE4Y2FkZTgyMmUiLCJlbWFpbCI6InNhY2hpbi5hcmFsYXB1cmFAZ21haWwuY29tIiwiaWF0IjoxNzIwNTEzMDY4fQ.krAC_tiAByNDXG33krSfBGVOjH97MjQoCt0k4n5JaII',
-    });
+    // const headers = new HttpHeaders({
+    //   authorization:
+    //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjhjMzllMDQ1MmVlYjE4Y2FkZTgyMmUiLCJlbWFpbCI6InNhY2hpbi5hcmFsYXB1cmFAZ21haWwuY29tIiwiaWF0IjoxNzIwNTEzMDY4fQ.krAC_tiAByNDXG33krSfBGVOjH97MjQoCt0k4n5JaII',
+    // });
 
-    return this.http
-      .get<Task[]>('http://localhost:5000/todo/tasks/all', { headers: headers })
-      .pipe(
-        catchError((err) => {
-          this.setErrorMessage(err);
-          return throwError(() => this.errorMessage);
-        })
-      );
+    return this.http.get<Task[]>('http://localhost:5000/todo/tasks/all').pipe(
+      catchError((err) => {
+        this.setErrorMessage(err);
+        return throwError(() => this.errorMessage);
+      })
+    );
   }
 
   createTask(task: Task) {
-    const headers = new HttpHeaders({
-      authorization:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjhjMzllMDQ1MmVlYjE4Y2FkZTgyMmUiLCJlbWFpbCI6InNhY2hpbi5hcmFsYXB1cmFAZ21haWwuY29tIiwiaWF0IjoxNzIwNTEzMDY4fQ.krAC_tiAByNDXG33krSfBGVOjH97MjQoCt0k4n5JaII',
-    });
+    // const headers = new HttpHeaders({
+    //   authorization:
+    //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjhjMzllMDQ1MmVlYjE4Y2FkZTgyMmUiLCJlbWFpbCI6InNhY2hpbi5hcmFsYXB1cmFAZ21haWwuY29tIiwiaWF0IjoxNzIwNTEzMDY4fQ.krAC_tiAByNDXG33krSfBGVOjH97MjQoCt0k4n5JaII',
+    // });
 
     return this.http
-      .post<Task>('http://localhost:5000/todo/tasks/newTask', task, {
-        headers: headers,
-      })
+      .post<Task>('http://localhost:5000/todo/tasks/newTask', task)
       .pipe(
         catchError((err) => {
           this.setErrorMessage(err);
@@ -49,35 +45,29 @@ export class TaskServices {
   }
 
   editTask(task: Task) {
-    const headers = new HttpHeaders({
-      authorization:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjhjMzllMDQ1MmVlYjE4Y2FkZTgyMmUiLCJlbWFpbCI6InNhY2hpbi5hcmFsYXB1cmFAZ21haWwuY29tIiwiaWF0IjoxNzIwNTEzMDY4fQ.krAC_tiAByNDXG33krSfBGVOjH97MjQoCt0k4n5JaII',
-    });
+    // const headers = new HttpHeaders({
+    //   authorization:
+    //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjhjMzllMDQ1MmVlYjE4Y2FkZTgyMmUiLCJlbWFpbCI6InNhY2hpbi5hcmFsYXB1cmFAZ21haWwuY29tIiwiaWF0IjoxNzIwNTEzMDY4fQ.krAC_tiAByNDXG33krSfBGVOjH97MjQoCt0k4n5JaII',
+    // });
 
     return this.http
-      .put<Task>(
-        `http://localhost:5000/todo/tasks/editTask/${task._id}`,
-        task,
-        { headers: headers }
-      )
+      .put<Task>(`http://localhost:5000/todo/tasks/editTask/${task._id}`, task)
       .pipe(
         catchError((err) => {
           this.setErrorMessage(err);
           return throwError(() => this.errorMessage);
         })
-      )
+      );
   }
 
   deleteTask(id: string) {
-    const headers = new HttpHeaders({
-      authorization:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjhjMzllMDQ1MmVlYjE4Y2FkZTgyMmUiLCJlbWFpbCI6InNhY2hpbi5hcmFsYXB1cmFAZ21haWwuY29tIiwiaWF0IjoxNzIwNTEzMDY4fQ.krAC_tiAByNDXG33krSfBGVOjH97MjQoCt0k4n5JaII',
-    });
+    // const headers = new HttpHeaders({
+    //   authorization:
+    //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjhjMzllMDQ1MmVlYjE4Y2FkZTgyMmUiLCJlbWFpbCI6InNhY2hpbi5hcmFsYXB1cmFAZ21haWwuY29tIiwiaWF0IjoxNzIwNTEzMDY4fQ.krAC_tiAByNDXG33krSfBGVOjH97MjQoCt0k4n5JaII',
+    // });
 
     return this.http
-      .delete(`http://localhost:5000/todo/tasks/deleteTask/${id}`, {
-        headers: headers,
-      })
+      .delete(`http://localhost:5000/todo/tasks/deleteTask/${id}`)
       .pipe(
         catchError((err) => {
           this.setErrorMessage(err);

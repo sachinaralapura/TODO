@@ -1,13 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { AuthResponse, CurrentUser, User } from '../Models/user';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, Subject, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
 
 @Injectable()
 export class UserServices {
   http: HttpClient = inject(HttpClient);
   errorMessage: String | null = null;
-  currentUserSubject: Subject<CurrentUser> = new Subject<CurrentUser>();
+  currentUserSubject: BehaviorSubject<CurrentUser> =
+    new BehaviorSubject<CurrentUser>(null);
 
   registerUser(user: User) {
     return this.http
@@ -38,9 +39,24 @@ export class UserServices {
       );
   }
 
+  logout() {
+    this.currentUserSubject.next(null);
+  }
+
+  autoLogin() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+      return;
+    }
+    const loggedUser = new CurrentUser(user.email, user.userId, user._token);
+    this.currentUserSubject.next(loggedUser);
+  }
+
   createUser(res: AuthResponse) {
     let user: CurrentUser = new CurrentUser(res.email, res._id, res.token);
     this.currentUserSubject.next(user);
+
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
   setErrorMessage(httpError: HttpErrorResponse) {

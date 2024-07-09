@@ -18,6 +18,10 @@ export class HeaderComponent {
       }
     );
   }
+
+  onLogout() {
+    this.userservice.logout();
+  }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

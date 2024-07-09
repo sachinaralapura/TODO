@@ -14,15 +14,7 @@ export class DashboardComponent {
   sucessMessage: string;
   editMode: boolean = false;
   editTask: Task | null = null;
-  Tasks: Task[] = [
-    {
-      _id: 'pp',
-      title: 'Welcome',
-      description: 'This is a demo task',
-      completed: true,
-      schedule: '2024-05-23',
-    },
-  ];
+  Tasks: Task[] = [];
 
   ngOnInit(): void {
     this.fetchAll();
@@ -66,7 +58,7 @@ export class DashboardComponent {
           this.Tasks = this.Tasks.concat(result);
           // set the edit mode back
           this.editMode = false;
-          this.editTask = null
+          this.editTask = null;
         },
         error: (errormessage) => (this.errorMessage = errormessage),
         complete: () => console.log('Edit sucessfull'),
