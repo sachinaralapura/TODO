@@ -1,45 +1,28 @@
-<app-create-task 
-        *ngIf="showCreateTaskForm" 
-        (CloseForm)="CloseCreateTaskForm()"
-></app-create-task>
+<app-create-task *ngIf="showCreateTaskForm" [editMode]="editMode" (CloseForm)="CloseCreateTaskForm()"
+    (EmitTask)="createOrEditTask($event)" [editTask]="editTask"></app-create-task>
 
 <div class="dashboard-container">
     <div style="display: flex;">
         <div style="width: 50%">
-            <h2>Dashboard</h2>
+            <h2>Todo List</h2>
         </div>
         <div style="width: 50%; text-align: right;">
             <button class="create-task-btn" (click)="OpenCreateTaskForm()">Create Task</button>
-            <button class="create-task-btn">Fetch Tasks</button>
-            <button class="create-task-btn">Clear Tasks</button>
         </div>
     </div>
 
     <hr>
 
     <div class="dashboard-item-container">
-            <div class="task-item">
-                <div class="task-title">
-                    <h3>Task Title</h3>
-                </div>
-                <p><b>Assigned to: </b>John Smith</p>
-                <p><b>Priority: </b>High</p>
-                <p><b>Status: </b>In Progress</p>
-                <div class="task-action-icons">
-                    <button class="task-action-btn" title="Detail">
-                        <i class="fa fa-info-circle" aria-hidden="true"></i>
-                    </button>
-                    <button class="task-action-btn" title="Edit">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    </button>
-                    <button class="task-action-btn" title="Delete">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </button>            
-                </div>
-            </div>
+        <ng-container *ngFor="let task of Tasks">
+            <!-- <todo-task [task]="task" *ngIf="
+                (currentFilter === 'all' ||
+                  currentFilter === task.isCompleted.toString()) &&
+                (searchText === '' ||
+                  task.taskTitle.toLowerCase().includes(searchText.toLowerCase()))
+              " /> -->
+            <app-task [task]="task" (DeleteTaskEvent)="deleteTask($event)" (EditTaskEvent)="openEdit($event)" (CheckedEvent)="taskChecked($event)" />
+        </ng-container>
+
     </div>
 </div>
-
-
-
-

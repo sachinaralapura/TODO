@@ -37,13 +37,12 @@ const register = async (req, res) => {
       userName: req.body.userName,
     });
 
-    const addedUser = await newUser.ave();
+    const addedUser = await newUser.save();
     const token = genereateToken(addedUser);
     res.status(200).json({
       token,
       _id: addedUser._id,
       email: addedUser.email,
-      userName: addedUser.userName,
     });
   } catch (er) {
     res.status(500).send({
@@ -55,7 +54,6 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     //get the user using the email
-    console.log(req.body);
     const user = await userModel.findOne({ email: req.body.email });
     if (!user) {
       return res.status(401).send({
@@ -68,7 +66,7 @@ const login = async (req, res) => {
       });
     }
     const token = genereateToken(user);
-    res.json({ token, _id: user._id });
+    res.json({ token, _id: user._id, email: user.email });
   } catch (err) {
     console.log(err);
     return res.status(500);
@@ -77,18 +75,22 @@ const login = async (req, res) => {
 
 const authenticateToken = (req, res, next) => {
   const { authorization } = req.headers;
+
   try {
-    const token = authorization.split(" ")[1];
-    if (token == null) return res.sendStatus(401);
-    JWT.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-      if (err) return res.sendStatus(403);
+    if (authorization == null)
+      return res.status(401).send({ message: "Unauthorized" });
+    JWT.verify(authorization, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+      if (err)
+        return res.status(403).send({
+          message: "unauthorized",
+        });
       req.user = user;
       next();
     });
   } catch (err) {
     console.log(err);
-    res.Status(500).send({
-      message: err,
+    res.status(500).send({
+      message: "Error in authentication",
     });
   }
 };

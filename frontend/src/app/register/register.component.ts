@@ -19,19 +19,6 @@ export class RegisterComponent {
   errorMessage: String = '' || null;
   subscription: Subscription;
 
-  ngOnInit(): void {
-    // this.subscription = this.userservice.errorSubject.subscribe({
-    //   next: (httpErr) => this.setErrorMessage(httpErr),
-    // });
-  }
-
-  setErrorMessage(httpError: HttpErrorResponse) {
-    this.errorMessage = httpError.error.message;
-    setTimeout(() => {
-      this.errorMessage = null;
-    }, 1000);
-  }
-
   registerUser() {
     let user: User = new User(
       this.form.value.email,
@@ -40,10 +27,12 @@ export class RegisterComponent {
     );
 
     this.userservice.registerUser(user).subscribe({
-      next: (data) => console.log(`register returned : ${data}`),
+      next: (data) => {
+        console.log(data);
+        this.router.navigateByUrl('dashboard');
+      },
       error: (err) => (this.errorMessage = err),
       complete: () => console.log('register complete'),
     });
-    // this.router.navigateByUrl('dashboard');
   }
 }

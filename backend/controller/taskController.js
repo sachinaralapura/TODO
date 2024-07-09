@@ -11,7 +11,7 @@ const getAllTasks = async (req, res) => {
     res.status(200).json(allTasks);
   } catch (err) {
     console.log(err);
-    res.status(500).send({ message: err });
+    res.status(500).send({ message: "Internal server error" });
   }
 };
 
@@ -20,19 +20,20 @@ const getAllTasks = async (req, res) => {
 const addTask = async (req, res) => {
   try {
     const newTask = new taskModel({
-      title: req.body.taskTitle,
-      description: req.body.description || " ",
+      title: req.body.title,
+      description: req.body.description,
       completed: req.body.completed,
-      created_at: Date(),
-      scheduledAt: Date.parse(req.body.scheduleAt),
+      schedule: req.body.schedule,
       userId: req.user._id,
     });
 
     const addedTask = await newTask.save();
-    return res.send(addedTask);
+    return res.status(200).send(addedTask);
   } catch (err) {
     console.log(err);
-    return res.status(500).send(err);
+    return res.status(500).send({
+      message: "failed to add new task",
+    });
   }
 };
 
@@ -40,12 +41,10 @@ const addTask = async (req, res) => {
 
 const deleteTask = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
   try {
     taskModel
       .findByIdAndDelete(id)
       .then((value) => {
-        console.log(value);
         res.status(200).send({
           message: "task deleted succesfully",
         });
@@ -64,4 +63,27 @@ const deleteTask = async (req, res) => {
   }
 };
 
-export { getAllTasks, addTask, deleteTask };
+// ---------------------------------------------------------------
+
+const editTask = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const task = {
+      _id  : id,
+      title: req.body.title,
+      description: req.body.description,
+      completed: req.body.completed,
+      schedule: req.body.schedule,
+    };
+    const result = await taskModel.findByIdAndUpdate(id, task); // result is the task before editing
+    if (result) {
+      res.status(200).send(task);
+    }
+  } catch (err) {
+    res.status(500).send({
+      message: "Internal server error",
+    });
+  }
+};
+
+export { getAllTasks, addTask, deleteTask, editTask };

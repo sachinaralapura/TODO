@@ -1,0 +1,31 @@
+.search-box {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Adjust width as needed */
+    margin-bottom: 1rem; /* Add some margin */
+  }
+
+  .search-box input[type="text"] {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px 0 0 5px; /* Rounded corners on left side */
+    flex-grow: 1; /* Allow input to fill remaining space */
+    font-size: 1rem;
+  }
+
+  .search-box input[type="text"]:focus {
+    outline: none; /* Remove default outline on focus */
+    border-color: #ccc; /* Change border color on focus */
+  }
+
+  .search-box button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0 5px 5px 0; /* Rounded corners on right side */
+    background-color: #fff; /* Set button background color */
+    cursor: pointer; /* Indicate clickable behavior */
+  }
+
+  .search-box button:hover {
+    background-color: #f5f5f5; /* Change background color on hover */
+  }

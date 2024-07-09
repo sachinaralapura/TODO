@@ -18,6 +18,8 @@ import { Router } from 'express';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthInterceptorService } from './Services/auth.interceptor.service';
 import { LoggingInterceptorService } from './Services/logging-interceptor.service';
+import { HeaderComponent } from './header/header.component';
+import { TaskComponent } from './dashboard/task/task.component';
 
 const route: Routes = [
   {
@@ -47,6 +49,8 @@ const route: Routes = [
     DashboardComponent,
     TaskDetailsComponent,
     CreateTaskComponent,
+    HeaderComponent,
+    TaskComponent,
   ],
   imports: [
     BrowserModule,

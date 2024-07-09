@@ -1,24 +1,47 @@
 GET http://localhost:5000/todo/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBwIiwicGFzc3dvcmQiOiJwYXNzd29yZCIsImlhdCI6MTcyMDM1NDYwM30.JZ1wW8YbuVQsKG6Go4PzKcuCxBP-E4D_fjZaP0BuRsI
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBwIiwicGFzc3dvcmQiOiJwYXNzd29yZCIsImlhdCI6MTcyMDM1NDYwM30.JZ1wW8YbuVQsKG6Go4PzKcuCxBP-E4D_fjZaP0BuRsI
 
 ###
 
 GET  http://localhost:5000/todo/tasks/all
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjhhYWYwZDExMzdhOWZjNGViZGIxZTEiLCJlbWFpbCI6InNhY2hpbi5hcmFsYXB1cmFAZ21haWwuY29tIiwiaWF0IjoxNzIwMzcwNjQ1fQ.LVm7HHzN93gahomY6Q39XsC-ALG7njtmvXmh6AuuyqQ
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjhjMzllMDQ1MmVlYjE4Y2FkZTgyMmUiLCJlbWFpbCI6InNhY2hpbi5hcmFsYXB1cmFAZ21haWwuY29tIiwiaWF0IjoxNzIwNTEzMDY4fQ.krAC_tiAByNDXG33krSfBGVOjH97MjQoCt0k4n5JaII
+###
+PUT  http://localhost:5000/todo/tasks/editTask/668d0dd8e905a051866085d6
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjhjMzllMDQ1MmVlYjE4Y2FkZTgyMmUiLCJlbWFpbCI6InNhY2hpbi5hcmFsYXB1cmFAZ21haWwuY29tIiwiaWF0IjoxNzIwNTEzMDY4fQ.krAC_tiAByNDXG33krSfBGVOjH97MjQoCt0k4n5JaII
 
+{
+    "title" : "go to badminton",
+    "description" : "badminton this morning",
+    "completed" : true,
+    "scheduledAt" : "2024-05-23"
+}
 
 ###
 POST  http://localhost:5000/todo/tasks/newTask
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjhiZTUzN2ZhYmIxNmFkZTEzODk2YTYiLCJlbWFpbCI6InNhY2hpbi5hcmFsYXB1cmFAZ21haWwuY29tIiwiaWF0IjoxNzIwNDQ0MjE2fQ.u8Rqcrwt4adEIIJTM6yn7z-b56CXJ-lhA2YGBvpCa5E
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjhjMzllMDQ1MmVlYjE4Y2FkZTgyMmUiLCJlbWFpbCI6InNhY2hpbi5hcmFsYXB1cmFAZ21haWwuY29tIiwiaWF0IjoxNzIwNTEzMDY4fQ.krAC_tiAByNDXG33krSfBGVOjH97MjQoCt0k4n5JaII
 
 {
     "taskTitle" : "Wash car",
     "description" : "wash car this morning",
     "completed" : false,
-    "scheduleAt" : "2024-07-07T12:15:51.820+00:00"
+    "scheduleAt" : "2024-07-07"
 }
+
+###
+POST  http://localhost:5000/todo/tasks/newTask
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjhjMzllMDQ1MmVlYjE4Y2FkZTgyMmUiLCJlbWFpbCI6InNhY2hpbi5hcmFsYXB1cmFAZ21haWwuY29tIiwiaWF0IjoxNzIwNTEzMDY4fQ.krAC_tiAByNDXG33krSfBGVOjH97MjQoCt0k4n5JaII
+
+{
+    "taskTitle" : "badminton",
+    "description" : "badminton in morning",
+    "completed" : false,
+    "scheduleAt" : "2024-07-07"
+}
+
 
 ###
 
@@ -49,12 +72,15 @@ Content-Type: application/json
 
 {
     "email" :"sachin.aralapura@gmail.com",
-    "password":"sacinppp"
+    "password":"sachin"
     
 }
 
 ###
 
-DELETE  http://localhost:5000/todo/tasks/deleteTask/668be571fabb16ade13896a8
+DELETE  http://localhost:5000/todo/tasks/deleteTask/668cf456b142f834bb1ffc99
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjhiZTUzN2ZhYmIxNmFkZTEzODk2YTYiLCJlbWFpbCI6InNhY2hpbi5hcmFsYXB1cmFAZ21haWwuY29tIiwiaWF0IjoxNzIwNDQ0MjE2fQ.u8Rqcrwt4adEIIJTM6yn7z-b56CXJ-lhA2YGBvpCa5E
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjhjMzllMDQ1MmVlYjE4Y2FkZTgyMmUiLCJlbWFpbCI6InNhY2hpbi5hcmFsYXB1cmFAZ21haWwuY29tIiwiaWF0IjoxNzIwNTEzMDY4fQ.krAC_tiAByNDXG33krSfBGVOjH97MjQoCt0k4n5JaII
+
+
+
