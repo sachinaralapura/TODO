@@ -20,14 +20,19 @@
   text-decoration: none; /* Remove underline for completed tasks */
 }
 
+.task h4:hover,
+.Date:hover {
+  cursor: pointer;
+}
+
 #task-date {
   font-size: smaller;
 }
-.task-title.completed {
+.task.completed {
   text-decoration: line-through; /* Add line-through for completed tasks */
   color: #888; /* Make completed tasks appear less prominent */
 }
-
+  
 .task-operation {
   display: flex;
   flex-direction: column;
@@ -44,4 +49,8 @@
 .task-operation button:hover {
   background-color: #3498db;
   color: white;
+}
+
+.task .created {
+  font-size: small;
 }

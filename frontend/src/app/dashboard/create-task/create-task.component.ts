@@ -39,6 +39,7 @@ export class CreateTaskComponent {
       completed: complete,
       title: this.formRef.value.title,
       description: this.formRef.value.description,
+      notes: this.formRef.value.notes,  
       schedule: this.formRef.value.schedule,
     };
 

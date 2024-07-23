@@ -1,10 +1,37 @@
-<div [ngClass]="{'task': true , 'completed' : task.completed}">
-  <input type="checkbox" id="task-completed" [(ngModel)]="task.completed" (change)="taskChecked(task)" />
-  <h4 [ngClass]="{'task-title': true , 'completed' : task.completed}">{{ task.title }}</h4>
-  <div class>
+<div [ngClass]="{ task: true, completed: task.completed }">
+  <app-task-details
+    *ngIf="taskDetails"
+    (CloseDetailsEvent)="showTaskDetails()"
+    [task]="task"
+  ></app-task-details>
+  <input
+    type="checkbox"
+    id="task-completed"
+    [(ngModel)]="task.completed"
+    (change)="taskChecked(task)"
+  />
+  <h4
+    (click)="showTaskDetails()"
+    [ngClass]="{ 'task-title': true, completed: task.completed }"
+  >
+    {{ task.title }}
+  </h4>
+  <div class (click)="showTaskDetails()" class="Date">
     <span *ngIf="task.schedule">Date:</span>
     <span id="task-date"> {{ task.schedule }} </span>
   </div>
+  <div>
+    <p>{{ task.notes }}</p>
+  </div>
+  <div class="created">
+    created on :
+    {{ task.created }}
+  </div>
+  <div class="created" *ngIf="task.updated">
+    updated on :
+    {{ task.updated }}
+  </div>
+
   <div class="task-operation">
     <button (click)="emitTaskToEdit(task)">edit</button>
     <button (click)="emitTaskToDelete(task._id)">delete</button>

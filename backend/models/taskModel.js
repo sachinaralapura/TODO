@@ -13,11 +13,19 @@ const taskSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  created_at: {
-    type: Date,
+  created: {
+    type: String,
+    default: Date(Date.now()).toString(),
+  },
+  notes: {
+    type: String,
+  },
+  updated: {
+    type: String,
+    default: "",
   },
   schedule: {
-    type: string, // Field for storing scheduled time and date
+    type: String, // Field for storing scheduled time and date
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,

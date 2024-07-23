@@ -24,6 +24,7 @@ const addTask = async (req, res) => {
       description: req.body.description,
       completed: req.body.completed,
       schedule: req.body.schedule,
+      notes: req.body.notes,
       userId: req.user._id,
     });
 
@@ -69,11 +70,14 @@ const editTask = async (req, res) => {
   const { id } = req.params;
   try {
     const task = {
-      _id  : id,
+      _id: id,
       title: req.body.title,
       description: req.body.description,
       completed: req.body.completed,
       schedule: req.body.schedule,
+      updated: req.body.updated,
+      created : req.body.created,
+      notes : req.body.notes
     };
     const result = await taskModel.findByIdAndUpdate(id, task); // result is the task before editing
     if (result) {

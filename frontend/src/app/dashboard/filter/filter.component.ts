@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'todo-filter',
+  selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.css',
 })

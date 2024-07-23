@@ -1,13 +1,13 @@
 <div class="overlay">
   <div class="popup">
     <h2>{{ editMode ? 'Edit Task' : 'Create a new Task' }}</h2>
-    <a class="close"  (click)="OnCloseForm()">&times;</a>
+    <a class="close" (click)="OnCloseForm()">&times;</a>
     <div class="content">
       <section class="container">
         <form action="#" class="form" #formRef="ngForm" (ngSubmit)="onSubmit()">
           <div class="input-box">
             <label>Title</label>
-            <input type="text"  name="title" ngModel required/>
+            <input type="text" name="title" ngModel required />
             <small *ngIf="formRef.controls['title']?.touched && formRef.controls['title'].invalid">
               required
             </small>
@@ -15,6 +15,9 @@
           <div class="input-box">
             <label>Description</label>
             <textarea rows="8" name="description" ngModel></textarea>
+          </div>
+          <div>
+            <input type="text" name="notes" placeholder="notes" ngModel>
           </div>
           <div class="input-box">
             <label>scheduled on</label>

@@ -1,0 +1,25 @@
+<div class="overlay">
+    <div class="popup">
+        <h2>{{task.title}}</h2>
+        <hr>
+        <a class="close" (click)="closeDetails()">&times;</a>
+        <div class="content">
+            <section class="container">
+
+
+                <p>
+                    {{task.description}}
+                </p>
+                <div style="display: flex; margin-top: 20px;">
+                    <div style="width: 50%;">
+                        <strong> {{task.completed ? 'Completed' : 'not Completed'}} </strong>
+                    </div>
+                    <div style="width: 50%;">
+                        <strong>Scheduled on: </strong>
+                        {{task.schedule}}
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

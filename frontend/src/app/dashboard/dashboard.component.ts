@@ -1,11 +1,12 @@
-import { Component, inject } from '@angular/core';
-import { TaskServices } from '../Services/task.services';
-import { Task } from '../Models/task.model';
+import { Component, inject } from "@angular/core";
+import { TaskServices } from "../Services/task.services";
+import { Task } from "../Models/task.model";
+import { tick } from "@angular/core/testing";
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
+  selector: "app-dashboard",
+  templateUrl: "./dashboard.component.html",
+  styleUrls: ["./dashboard.component.css"],
 })
 export class DashboardComponent {
   taskservice: TaskServices = inject(TaskServices);
@@ -14,7 +15,11 @@ export class DashboardComponent {
   sucessMessage: string;
   editMode: boolean = false;
   editTask: Task | null = null;
+  searchText: string = "";
   Tasks: Task[] = [];
+  completed: number;
+  notComleted: number;
+  currentFilter: string = "all";
 
   ngOnInit(): void {
     this.fetchAll();
@@ -24,9 +29,11 @@ export class DashboardComponent {
     this.taskservice.getAllTask().subscribe({
       next: (result) => {
         this.Tasks.push(...result);
+        this.completed = this.Tasks.filter((t) => t.completed === true).length;
+        this.notComleted = this.Tasks.length - this.completed;
       },
       error: (errormessage) => (this.errorMessage = errormessage),
-      complete: () => console.log('all tasks fetched'),
+      complete: () => console.log("all tasks fetched"),
     });
   }
 
@@ -38,7 +45,7 @@ export class DashboardComponent {
         this.Tasks = this.Tasks.filter((task) => task._id !== id); // this is delete in Task which is memory
       },
       error: (err) => (this.errorMessage = err),
-      complete: () => console.log('deletion completed'),
+      complete: () => console.log("deletion completed"),
     });
   }
 
@@ -48,12 +55,23 @@ export class DashboardComponent {
     // for editing
 
     if (this.editMode) {
-      task._id = this.editTask._id;
-      this.taskservice.editTask(task).subscribe({
+      const editedTask: Task = {
+        title: task.title,
+        description: task.description,
+        schedule: task.schedule,
+        completed: task.completed,
+        updated: Date().toString(),
+        _id: this.editTask._id,
+        notes: task.notes,
+        created: this.editTask.created,
+      };
+      console.log(task.created);
+      this.taskservice.editTask(editedTask).subscribe({
         next: (result) => {
+          console.log(result);
           // remove the item in the Task and concating result this ( this gives fast response)
           this.Tasks = this.Tasks.filter(
-            (task) => task._id !== this.editTask._id
+            (task) => task._id !== this.editTask._id,
           );
           this.Tasks = this.Tasks.concat(result);
           // set the edit mode back
@@ -61,21 +79,23 @@ export class DashboardComponent {
           this.editTask = null;
         },
         error: (errormessage) => (this.errorMessage = errormessage),
-        complete: () => console.log('Edit sucessfull'),
+        complete: () => console.log("Edit sucessfull"),
       });
 
       // for creating new task
-    } else
+    } else {
       this.taskservice.createTask(task).subscribe({
         next: (result) => {
+          console.log(result);
           this.Tasks = this.Tasks.concat(result); // pushing the result doesn't change the reference of Task
         },
         error: (errormessage) => {
           this.errorMessage = errormessage;
           console.log(errormessage);
         },
-        complete: () => console.log('task added complete'),
+        complete: () => console.log("task added complete"),
       });
+    }
 
     this.CloseCreateTaskForm();
   }
@@ -100,5 +120,13 @@ export class DashboardComponent {
 
   CloseCreateTaskForm() {
     this.showCreateTaskForm = false;
+  }
+
+  search(searchText: string) {
+    this.searchText = searchText;
+  }
+
+  setFilter(filter: string) {
+    this.currentFilter = filter;
   }
 }

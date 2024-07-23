@@ -10,6 +10,10 @@ export class TaskComponent {
   @Output() DeleteTaskEvent: EventEmitter<string> = new EventEmitter<string>();
   @Output() EditTaskEvent: EventEmitter<Task> = new EventEmitter<Task>();
   @Output() CheckedEvent: EventEmitter<Task> = new EventEmitter<Task>();
+  taskDetails: boolean = false;
+
+  ngOnInit(): void {
+  }
 
   emitTaskToDelete(id: string) {
     this.DeleteTaskEvent.emit(id);
@@ -21,5 +25,9 @@ export class TaskComponent {
 
   taskChecked(task: Task) {
     this.CheckedEvent.emit(task);
+  }
+
+  showTaskDetails() {
+    this.taskDetails = !this.taskDetails;
   }
 }

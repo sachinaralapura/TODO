@@ -14,14 +14,14 @@
     <hr>
 
     <div class="dashboard-item-container">
+        <app-search (searchEvent)="search($event)"></app-search>
+        <app-filter [completed]="completed" [notCompleted]="notComleted"
+            (onFilterEvent)="setFilter($event)"></app-filter>
+
         <ng-container *ngFor="let task of Tasks">
-            <!-- <todo-task [task]="task" *ngIf="
-                (currentFilter === 'all' ||
-                  currentFilter === task.isCompleted.toString()) &&
-                (searchText === '' ||
-                  task.taskTitle.toLowerCase().includes(searchText.toLowerCase()))
-              " /> -->
-            <app-task [task]="task" (DeleteTaskEvent)="deleteTask($event)" (EditTaskEvent)="openEdit($event)" (CheckedEvent)="taskChecked($event)" />
+            <app-task [task]="task" (DeleteTaskEvent)="deleteTask($event)" (EditTaskEvent)="openEdit($event)"
+                (CheckedEvent)="taskChecked($event)" *ngIf="(searchText === '' || task.title.toLowerCase().includes(searchText.toLowerCase()))
+                && ( currentFilter === 'all' || currentFilter === task.completed.toString())" />
         </ng-container>
 
     </div>
